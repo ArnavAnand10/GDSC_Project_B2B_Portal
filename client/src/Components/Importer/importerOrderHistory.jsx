@@ -1,14 +1,49 @@
 import React from 'react';
 import Navbar from '../Navbar';
 import orderHistory from '../../Assets/Images/dummyAssests/dummyOrderHistory';
+import styled from 'styled-components'; // Import styled from styled-components
 
-export default function importerOrderHistory() {
+const StyledTable = styled.table`
+    margin-top: 20px; /* Adequate margin from the top */
+    text-align: center; /* Center align content */
+
+    .order-history-table-container {
+        margin-top: 20px; /* Adequate margin from the Navbar */
+        margin-bottom: 20px; /* Adequate margin from the table */
+        display: inline-block; /* Allow centering */
+    }
+
+    .order-history-table {
+        width: 80%; /* Set width of the table */
+        margin: 0 auto; /* Center align the table */
+    }
+
+    .order-history-table th,
+    .order-history-table td {
+        padding: 10px; /* Add padding to table cells */
+        text-align: center; /* Center align table cell content */
+    }
+
+    .order-history-table th {
+        background-color: #f2f2f2; /* Add background color to table header */
+    }
+
+    .order-history-table td.Completed {
+        color: green; /* Set color for Completed status */
+    }
+
+    .order-history-table td.Cancelled {
+        color: red; /* Set color for Cancelled status */
+    }
+`;
+
+export default function ImporterOrderHistory() {
     return (
         <div>
             <Navbar />
-            <div>
+            <div className="order-history-table-container">
                 <h2 className='poppins-regular'>Order History</h2>
-                <table>
+                <StyledTable>
                     <thead>
                         <tr>
                             <th>Order ID</th>
@@ -23,7 +58,7 @@ export default function importerOrderHistory() {
                             <tr key={order.orderId}>
                                 <td>{order.orderId}</td>
                                 <td style={{
-                                    color : order.status.toLowerCase == 'completed' && 'green' || order.status.toLowerCase == 'canceled' && 'red' || 'black',
+                                    color : order.status.toLowerCase() === 'completed' ? 'green' : order.status.toLowerCase() === 'cancelled' ? 'red' : 'black',
                                 }}>{order.status}</td>
                                 <td>{order.date}</td>
                                 <td>{order.total}</td>
@@ -31,9 +66,8 @@ export default function importerOrderHistory() {
                             </tr>
                         ))}
                     </tbody>
-                </table>
+                </StyledTable>
             </div>
         </div>
     )
 }
-

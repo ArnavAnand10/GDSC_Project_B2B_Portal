@@ -19,7 +19,7 @@ const importerAddressSchema = mongoose.Schema({
     zipCode:{
         type : String,
     },
-    phone:{
+    addressPhoneNumber:{
         type:String,
     }
 })

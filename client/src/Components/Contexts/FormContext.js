@@ -9,9 +9,7 @@ export const FormProvider = ({ children }) => {
    
   });
 
-  useEffect(() => {
-    console.log("Form Values:", formValues);
-  }, [formValues]); // Log form values whenever they change
+  
 
 
   const updateFormValue = (name, value) => {

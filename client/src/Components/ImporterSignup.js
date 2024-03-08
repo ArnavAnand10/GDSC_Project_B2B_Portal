@@ -11,9 +11,14 @@ import { useFormContext } from "./Contexts/FormContext";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import auth from "../Firebase/FireBase";
 import LoadingButton from '@mui/lab/LoadingButton';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
+
 
 
 const ImporterSignup = () => {
+    const naviagte = useNavigate();
     const [showPassword, setShowPassword] = useState(true);
     const steps = [
         'Personal Details',
@@ -26,6 +31,7 @@ const ImporterSignup = () => {
         const [snackBarVisibility, setSnackBarVisibility] = useState(false);
         const [snackBarMessage, setSnackBarMessage] = useState("Test Message");
         const [snackBarType, setSnackBarType] = useState("success");
+        const [nextButtonLoading, setNextButtonLoading] = useState(false);
 
         const { formValues, updateFormValue } = useFormContext();
 
@@ -63,11 +69,16 @@ const ImporterSignup = () => {
                 />
                 <TextField
                     type="email"
-                    value={formValues.email || ''}
-                    name="email"
+                    value={formValues.emailAddress || ''}
+                    name="emailAddress"
                     label="Email Address"
                     onChange={handleFormValues}
                     required
+                />
+                <ReactPhoneInput
+                    value={formValues.loginNumber || ''}
+                    onChange={(newValue) => updateFormValue("loginNumber", newValue)}
+                    component={TextField}
                 />
                 <TextField
                     name="password"
@@ -87,13 +98,15 @@ const ImporterSignup = () => {
                     onChange={handleFormValues}
                     required
                 />
-                <Button
+                <LoadingButton
+                    loading={nextButtonLoading}
                     type="submit"
                     style={{ marginTop: "10px", backgroundColor: "#2C83EC", fontFamily: "Poppins" }}
                     onClick={() => {
                         const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
                         const passRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-                        if (!formValues.fullName || !formValues.email || !formValues.gender || !formValues.password) {
+                        const phoneRegex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/;
+                        if (!formValues.fullName || !formValues.emailAddress || !formValues.gender || !formValues.password || !formValues.loginNumber) {
                             setSnackBarMessage("All Fields Are Required");
                             setSnackBarType("error");
                             setSnackBarVisibility(true);
@@ -101,22 +114,60 @@ const ImporterSignup = () => {
                             setSnackBarMessage("Weak Password : Minimum eight characters, at least one letter, one number and one special character is Required");
                             setSnackBarType("error");
                             setSnackBarVisibility(true);
-                        } else if (!formValues.email.match(emailRegex)) {
+                        } else if (!formValues.emailAddress.match(emailRegex)) {
                             setSnackBarMessage("Enter Valid Email");
                             setSnackBarType("error");
                             setSnackBarVisibility(true);
-                        } else {
-                            setStepNumber((prev) => prev + 1);
                         }
-                    }}
+                        else if (!formValues.loginNumber.match(phoneRegex)) {
+                            setSnackBarMessage("Enter Valid Number");
+                            setSnackBarType("error");
+                            setSnackBarVisibility(true);
+                        }
+                        else {
+
+                            const detailsValidator = async () => {
+                                setNextButtonLoading(true);
+
+                                try {
+                                    const config = {
+                                        headers: {
+                                            "content-type": "application/json"
+                                        }
+                                    }
+                                    const response = await axios.post("http://localhost:4000/importerSignupValidator", formValues, config);
+                                    setNextButtonLoading(false);
+                                    setStepNumber((prev) => prev + 1);
+
+
+                                }
+
+
+                                catch (e) {
+                                    setNextButtonLoading(false);
+
+                                    setSnackBarMessage(e.response.data.msg);
+                                    setSnackBarType("error");
+                                    setSnackBarVisibility(true);
+                                }
+
+                            }
+                            detailsValidator();
+                        }
+                    }
+                    }
                     variant="contained"
                     disableElevation
                     size="large"
                 >
                     NEXT
-                </Button>
+                </LoadingButton>
                 <p className="font-roboto text-sm text-center">
-                    Already A User?<b> <span className="text-[#2C83EC]"> Sign In </span></b>
+                    Already A User?<b> <span onClick={()=>{
+                        naviagte("/")
+                    }} style={{
+                        cursor:"pointer",
+                    }} className="text-[#2C83EC]"> Sign In </span></b>
                 </p>
             </>
         );
@@ -210,9 +261,10 @@ const ImporterSignup = () => {
                     />
                 </div>
                 <ReactPhoneInput
-                    value={formValues.phone || ''}
-                    onChange={(newValue) => updateFormValue("phone", newValue)}
+                    value={formValues.addressPhoneNumber || ''}
+                    onChange={(newValue) => updateFormValue("addressPhoneNumber", newValue)}
                     component={TextField}
+                    label="Address Phone Number"
                 />
                 <Button
                     type="submit"
@@ -221,11 +273,21 @@ const ImporterSignup = () => {
                         fontFamily: "Poppins",
                     }}
                     onClick={() => {
-                        if (!formValues.fullAddress || !formValues.area || !formValues.zipCode || !formValues.state || !formValues.phone) {
+                        const phoneRegex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/;
+
+                        if (!formValues.fullAddress || !formValues.area || !formValues.zipCode || !formValues.state || !formValues.addressPhoneNumber) {
                             setSnackBarMessage("All Fields Are Required");
                             setSnackBarType("error");
                             setSnackBarVisibility(true);
-                        } else {
+                        }
+
+                        else if (!formValues.addressPhoneNumber.match(phoneRegex)) {
+                            setSnackBarMessage("Enter Valid Address Phone Number");
+                            setSnackBarType("error");
+                            setSnackBarVisibility(true);
+                        }
+
+                        else {
                             setStepNumber((prev) => prev + 1);
                         }
                     }}
@@ -285,7 +347,7 @@ const ImporterSignup = () => {
 
 
             const appVerifier = window.recaptchaVerifier;
-            const phoneNumber = `+${formValues.phone}`;
+            const phoneNumber = `+${formValues.loginNumber}`;
 
             signInWithPhoneNumber(authFirebase, phoneNumber, appVerifier)
                 .then((confirmationResult) => {
@@ -293,7 +355,7 @@ const ImporterSignup = () => {
                     setSendOtpLoading(false);
 
                     // showing snackbar
-                    setSnackBarMessage(`SMS sent on ${phoneNumber}`);
+                    setSnackBarMessage(`OTP sent on ${phoneNumber}`);
                     setSnackBarType("success");
                     setSnackBarVisibility(true);
                     // SMS sent. Prompt user to type the code from the message, then sign the
@@ -317,7 +379,7 @@ const ImporterSignup = () => {
                 });
         }
 
-        const onOtpVerify = () => {
+        const onOtpVerify = async () => {
 
             setVerifyOtpLoading(true);
             confirmationResult.confirm(OTP).then((result) => {
@@ -330,6 +392,32 @@ const ImporterSignup = () => {
                 setSnackBarMessage(`Verification Successfull`);
                 setSnackBarType("success");
                 setSnackBarVisibility(true);
+                const config = {
+
+                    headers: {
+                        "content-type": "application/json"
+                    }
+
+                }
+
+                console.log(formValues);
+                const signUpUser = async () => {
+
+                    try {
+                        const response = await axios.post("http://localhost:4000/signupImporter", formValues, config);
+                        setSnackBarMessage(`Signup Successfull`);
+                        setSnackBarType("success");
+                        setSnackBarVisibility(true);
+                    }
+                    catch (e) {
+                        setSnackBarMessage(e.response.data.msg);
+                        setSnackBarType("error");
+                        setSnackBarVisibility(true);
+                    }
+                }
+
+                signUpUser();
+
 
 
                 // ...
@@ -348,7 +436,7 @@ const ImporterSignup = () => {
             <div className="flex flex-col justify-center text-center">
 
                 {customSnackBar()}
-                <h1 className="text-2xl text-center m-4"> OTP will be sent to <b>+{formValues.phone}</b> </h1>
+                <h1 className="text-2xl text-center m-4"> OTP will be sent to <b>+{formValues.loginNumber}</b> </h1>
                 <LoadingButton loading={sendOtpLoading} id="sign-in-button" onClick={() => {
                     // setting loading to true
                     setSendOtpLoading(true);
@@ -365,7 +453,7 @@ const ImporterSignup = () => {
                             // Callback function when reCAPTCHA is successfully solved
                             onSignInSubmit();
 
-                            // recaptchaContainer.replaceChildren();
+                        
 
                         },
                         'expired-callback': () => {

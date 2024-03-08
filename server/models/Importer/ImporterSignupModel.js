@@ -22,6 +22,10 @@ const ImporterSignupSchema = mongoose.Schema({
 
     },
 
+    loginNumber:{
+        type:String,
+    },
+
     address:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "ImporterAddress"

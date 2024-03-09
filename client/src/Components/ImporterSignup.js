@@ -382,7 +382,7 @@ const ImporterSignup = () => {
         const onOtpVerify = async () => {
 
             setVerifyOtpLoading(true);
-            confirmationResult.confirm(OTP).then((result) => {
+            window.confirmationResult.confirm(OTP).then((result) => {
 
                 setVerifyOtpLoading(false);
 

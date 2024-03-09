@@ -90,6 +90,7 @@ const Login = () => {
 
 
 
+    // forgot pass OTP
     const sendOtp = () => {
 
 
@@ -98,10 +99,10 @@ const Login = () => {
 
         const appVerifier = window.recaptchaVerifier;
         const phoneNumber = `+${fetchedPhone}`;
-        const number = "XXXXXXX"+fetchedPhone.substring(9,12);
+        const number = "XXXXXXX" + fetchedPhone.substring(9, 12);
         signInWithPhoneNumber(authFirebase, phoneNumber, appVerifier)
             .then((confirmationResult) => {
-             
+
                 setIsShowEmail(false);
                 setResetLoading(false);
                 setShowOtpField(true);
@@ -212,7 +213,8 @@ const Login = () => {
     const verifyOtp = async () => {
 
         setVerifyOtpLoading(true);
-        confirmationResult.confirm(OTP).then((result) => {
+
+       window.confirmationResult.confirm(OTP).then((result) => {
 
             // loading of verify otp button
             setVerifyOtpLoading(false);
@@ -302,11 +304,19 @@ const Login = () => {
                     </h1>
 
 
-                    <TextField type="email" label="Email Address" required>
+                    <TextField type="email" label="Email Address" onChange={
+                        (e) => {
+                            onInputChange(e);
+                        }
+                    } required>
 
                     </TextField>
 
-                    <TextField InputProps={{
+                    <TextField onChange={
+                        (e) => {
+                            onInputChange(e);
+                        }
+                    } InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
                                 <IconButton onClick={() => {
@@ -333,7 +343,7 @@ const Login = () => {
                             backgroundColor: "#2C83EC",
                             fontFamily: "Poppins",
                         }
-                    } variant="contained" disableElevation size="large">
+                    } variant="contained" onClick={loginUser} disableElevation size="large">
 
                         SIGN IN
 
@@ -379,7 +389,7 @@ const Login = () => {
 
                             {showOtpField && <div>
                                 <hr className="m-4" />
-                                OTP has been sent to <b>{"XXXXXXX"+fetchedPhone.substring(9,12)}</b>
+                                OTP has been sent to <b>{"XXXXXXX" + fetchedPhone.substring(9, 12)}</b>
 
                                 <br />
                                 <h1 className="my-4 font-medium text-xl">
@@ -404,23 +414,23 @@ const Login = () => {
                             </div>}
 
                             {isOtpVerified && <div>
-                                <TextField onChange={(e)=>{
+                                <TextField onChange={(e) => {
                                     setNewPassword(e.target.value);
                                 }} InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton onClick={() => {
-                                    setShowPassword((previous) => (!previous));
-                                }}>
-                                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                                </IconButton>
-                            </InputAdornment>
-                        )
-                    }} type={showPassword ? "password" : "text"} label="Password" sx={{
-                        marginBottom: "-10px"
-                    }} required>
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton onClick={() => {
+                                                setShowPassword((previous) => (!previous));
+                                            }}>
+                                                {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
+                                }} type={showPassword ? "password" : "text"} label="Password" sx={{
+                                    marginBottom: "-10px"
+                                }} required>
 
-                    </TextField>
+                                </TextField>
                                 <LoadingButton loading={changePasswordLoading} onClick={changePasswordFinal} sx={{
                                     margin: "10px"
                                 }}> Change Password </LoadingButton>

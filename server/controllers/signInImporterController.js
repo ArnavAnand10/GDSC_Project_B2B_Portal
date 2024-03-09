@@ -14,11 +14,11 @@ const signInImporter = async (req, res) => {
                 return res.status(200).json({status:"Success",msg:"User Authenticated"})
 
             }else{
-                return res.status(200).json({status:"Error",msg:"Incorrect Password"})
+                return res.status(403).json({status:"Error",msg:"Incorrect Password"})
 
             }
         }else{
-            return res.status(200).json({status:"Error",msg:"No Importer Found With this Email."})
+            return res.status(403).json({status:"Error",msg:"No Importer Found With this Email."})
         }
 
     }

@@ -5,7 +5,7 @@ const changeImporterPassword = require("./controllers/changeImporterPasswordCont
 const signInImporter = require("./controllers/signInImporterController");
 const router = express.Router();
 
-router.post("/signupImporter",signInImporter)
+router.post("/signinImporter",signInImporter)
 router.post("/signupImporter",signupImporter)
 router.post("/importerSignupValidator",importerSignupValidator)
 router.post("/checkEmailExists",checkEmailExists)

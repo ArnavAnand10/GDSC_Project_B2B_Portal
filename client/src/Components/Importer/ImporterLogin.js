@@ -83,9 +83,22 @@ const Login = () => {
         setLoginData({ ...loginData, [e.target.name]: e.target.value });
     }
 
-    function loginUser() {
+    const loginUser = async () => {
         console.log(loginData);
-        // Reset the loginData state to empty object after logging the data
+
+
+        try {
+            const config = {
+                headers: {
+                    "content-type": "application/json"
+                }
+            }
+
+            const response = await axios.post("http://localhost:4000/signinImporter", loginData, config);
+            console.log(response.data.status);
+        } catch (e) {
+            console.log(e.response.data.msg);
+        }
     }
 
 
@@ -214,7 +227,7 @@ const Login = () => {
 
         setVerifyOtpLoading(true);
 
-       window.confirmationResult.confirm(OTP).then((result) => {
+        window.confirmationResult.confirm(OTP).then((result) => {
 
             // loading of verify otp button
             setVerifyOtpLoading(false);
@@ -304,7 +317,7 @@ const Login = () => {
                     </h1>
 
 
-                    <TextField type="email" label="Email Address" onChange={
+                    <TextField type="email" name="email" label="Email Address" onChange={
                         (e) => {
                             onInputChange(e);
                         }

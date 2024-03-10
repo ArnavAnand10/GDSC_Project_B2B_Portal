@@ -79,25 +79,49 @@ const Login = () => {
     const [newPassword, setNewPassword] = useState("");
     const [changePasswordLoading, setChangePasswordLoading] = useState(false);
 
+    // login loading
+    const [isLoginLoading, setIsLoginLoading] = useState(false);
+
     function onInputChange(e) {
         setLoginData({ ...loginData, [e.target.name]: e.target.value });
     }
 
     const loginUser = async () => {
-        console.log(loginData);
 
 
-        try {
-            const config = {
-                headers: {
-                    "content-type": "application/json"
+        if (!loginData.email || loginData.password) {
+            setSnackBarMessage("All Fields Are Required");
+            setSnackBarType("warning");
+            setSnackBarVisibility(true);
+
+        } else {
+
+
+
+            setIsLoginLoading(true);
+            try {
+
+                const config = {
+                    headers: {
+                        "content-type": "application/json"
+                    }
                 }
-            }
 
-            const response = await axios.post("http://localhost:4000/signinImporter", loginData, config);
-            console.log(response.data.status);
-        } catch (e) {
-            console.log(e.response.data.msg);
+                const response = await axios.post("http://localhost:4000/signinImporter", loginData, config);
+                setIsLoginLoading(false);
+                setSnackBarMessage(response.data.msg);
+                setSnackBarType("success");
+                setSnackBarVisibility(true);
+
+               
+            } catch (e) {
+                setIsLoginLoading(false);
+                setSnackBarMessage(e.response.data.msg);
+                setSnackBarType("error");
+                setSnackBarVisibility(true);
+
+
+            }
         }
     }
 
@@ -351,7 +375,7 @@ const Login = () => {
                         }}>Forgot Password?</p>
                     </div>
 
-                    <Button type="submit" style={
+                    <LoadingButton loading={isLoginLoading} type="submit" style={
                         {
                             backgroundColor: "#2C83EC",
                             fontFamily: "Poppins",
@@ -360,7 +384,7 @@ const Login = () => {
 
                         SIGN IN
 
-                    </Button>
+                    </LoadingButton>
 
 
 

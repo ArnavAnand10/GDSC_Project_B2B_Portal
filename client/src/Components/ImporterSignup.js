@@ -108,7 +108,7 @@ const ImporterSignup = () => {
                         const phoneRegex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/;
                         if (!formValues.fullName || !formValues.emailAddress || !formValues.gender || !formValues.password || !formValues.loginNumber) {
                             setSnackBarMessage("All Fields Are Required");
-                            setSnackBarType("error");
+                            setSnackBarType("warning");
                             setSnackBarVisibility(true);
                         } else if (!formValues.password.match(passRegex)) {
                             setSnackBarMessage("Weak Password : Minimum eight characters, at least one letter, one number and one special character is Required");
@@ -277,7 +277,7 @@ const ImporterSignup = () => {
 
                         if (!formValues.fullAddress || !formValues.area || !formValues.zipCode || !formValues.state || !formValues.addressPhoneNumber) {
                             setSnackBarMessage("All Fields Are Required");
-                            setSnackBarType("error");
+                            setSnackBarType("warning");
                             setSnackBarVisibility(true);
                         }
 

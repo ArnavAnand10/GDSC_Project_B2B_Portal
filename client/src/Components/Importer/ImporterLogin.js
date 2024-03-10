@@ -89,7 +89,9 @@ const Login = () => {
     const loginUser = async () => {
 
 
-        if (!loginData.email || loginData.password) {
+        console.log(loginData);
+
+        if (!loginData.email || !loginData.password) {
             setSnackBarMessage("All Fields Are Required");
             setSnackBarType("warning");
             setSnackBarVisibility(true);
@@ -349,7 +351,7 @@ const Login = () => {
 
                     </TextField>
 
-                    <TextField onChange={
+                    <TextField name="password" onChange={
                         (e) => {
                             onInputChange(e);
                         }

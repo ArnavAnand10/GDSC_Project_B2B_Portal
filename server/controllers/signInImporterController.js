@@ -5,12 +5,13 @@ const Importer = require("../Models/Importer/ImporterSignupModel")
 
 const signInImporter = async (req, res) => {
 
-    const { email, pass } = req.body;
+    const { email, password } = req.body;
+ 
 
     try {
         const User = await Importer.findOne({emailAddress:email});
         if(User){
-            if(User.password===pass){
+            if(User.password===password){
                 return res.status(200).json({status:"Success",msg:"User Authenticated"})
 
             }else{

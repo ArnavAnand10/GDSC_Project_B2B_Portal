@@ -3,12 +3,13 @@ const router = require("./routes");
 const connect = require("./DB/MonogDb");
 const app = express();
 const cors = require("cors");
+var cookieParser = require('cookie-parser')
+
 require('dotenv').config();
-
-
 app.use(express.json());
 app.use(cors());
-app.use("/",router)
+app.use("/",router);
+app.use(cookieParser())
 
 // connecting DB
 connect();

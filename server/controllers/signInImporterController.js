@@ -1,6 +1,6 @@
 const Importer = require("../Models/Importer/ImporterSignupModel")
-
-
+const jwt = require("jsonwebtoken");
+const bcrypt  = require("bcrypt");
 
 
 const signInImporter = async (req, res) => {
@@ -12,6 +12,18 @@ const signInImporter = async (req, res) => {
         const User = await Importer.findOne({emailAddress:email});
         if(User){
             if(User.password===password){
+
+                // assigning token to user on successfull login:
+
+                const AccessToken =  jwt.sign({id: User._id, email: email},process.env.JWT_SECRET_KEY,{expiresIn: '3m'});
+                const RefreshToken = jwt.sign({id: User._id, email: email},process.env.JWT_SECRET_KEY);
+                // sending the token using cookies after encrypting them using bcrypt:
+                
+                res.cookie('accessToken', AccessToken, { httpOnly: true, secure: true, // Set this only if your website is served over HTTPS
+                sameSite: 'strict', });
+                res.cookie('refreshToken', RefreshToken, { httpOnly: true, secure: true, // Set this only if your website is served over HTTPS
+                sameSite: 'strict', });
+            
                 return res.status(200).json({status:"Success",msg:"User Authenticated"})
 
             }else{

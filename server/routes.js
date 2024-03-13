@@ -3,9 +3,10 @@ const {signupImporter,importerSignupValidator} = require("./controllers/signupIm
 const checkEmailExists = require("./controllers/checkEmailExistsController");
 const changeImporterPassword = require("./controllers/changeImporterPasswordController");
 const signInImporter = require("./controllers/signInImporterController");
+const authMiddleWare = require("./middleware/Auth");
 const router = express.Router();
 
-router.post("/signinImporter",signInImporter)
+router.post("/signinImporter", signInImporter)
 router.post("/signupImporter",signupImporter)
 router.post("/importerSignupValidator",importerSignupValidator)
 router.post("/checkEmailExists",checkEmailExists)

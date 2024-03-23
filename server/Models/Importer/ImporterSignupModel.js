@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Product = require("../Exporter/productModel");
 
 // creating the required Schema
 
@@ -30,10 +31,10 @@ const ImporterSignupSchema = mongoose.Schema({
         required: true,
         unique:true
     },
-    cart:{
-        type:array,
-        ref: "Product"
-    },
+    cart: [{
+        type:  mongoose.Schema.Types.ObjectId,
+        ref: Product
+    }],
     wishlist:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Product"

@@ -1,4 +1,4 @@
-const Importer = require("../Models/ImporterSignupModel");
+const Importer = require("../Models/Importer/ImporterSignupModel");
 
 // Controller function to get the importer's wishlist
 const fetchWishlistProducta = async(req, res)=>{
@@ -11,8 +11,8 @@ const fetchWishlistProducta = async(req, res)=>{
         if (!importer) {
             return res.status(404).json({ message: "Importer not found" });
         }
-
-        res.status(200).json(importer.wishlist);
+        
+        res.status(200).json({wishlistData:importer.wishlist});
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Internal server error" });

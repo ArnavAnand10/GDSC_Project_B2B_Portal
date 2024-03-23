@@ -9,25 +9,37 @@ const authMiddleWare = require("./middleware/Auth");
 //Getting controller functions to the router manager
 
 const fetchProducts = require("./controllers/fetchAllProducts");
-const fetchProductSpecs = require("./controllers/fetchProductSpecsController");
 const fetchCartProduct = require("./controllers/fetchCartProductsController");
-const fetchWishlistProducta = require("./controllers/fetchWishlistProducts");
+const fetchWishlistProducts = require("./controllers/fetchWishlistProducts");
 const addWishlistProduct = require("./controllers/addWishListProductController");
 const addCartProduct = require("./controllers/addCartProductController");
+const fetchProduct = require("./controllers/fetchProductController");
+const removeFromCart = require("./controllers/removeCartProductController");
+const removeWishListProduct = require("./controllers/removeWishListProductController");
 //Setting up the router
 const router = express.Router();
+
+
+// Importer Routes
 
 router.post("/signinImporter", signInImporter)
 router.post("/signupImporter",signupImporter)
 router.post("/importerSignupValidator",importerSignupValidator)
 router.post("/checkEmailExists",checkEmailExists)
 router.post("/changeImporterPassword",changeImporterPassword)
-//importer router
+
+
+
 router.get("/api/products",fetchProducts)
-router.get("/api/products/",fetchProductSpecs);
-router.get("/api/cart/items",fetchCartProduct);
-router.get("/api/wishlist/items",fetchWishlistProducta);
-router.post("/api/cart/items",addCartProduct);
+router.get("/api/products/:id",fetchProduct)
+router.get("/api/cart/getItems",fetchCartProduct);
+router.post("/api/cart/addtocart",addCartProduct);
+router.post("/api/cart/removefromcart",removeFromCart);
+
+
+// wishlist routing
+router.get("/api/wishlist/getWishListItems",fetchWishlistProducts);
+router.delete("/api/wishlist/removeItem",removeWishListProduct);
 router.post("/api/wishlist/items",addWishlistProduct);
 
 module.exports = router;

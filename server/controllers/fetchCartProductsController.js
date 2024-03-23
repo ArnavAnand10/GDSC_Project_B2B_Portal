@@ -1,4 +1,4 @@
-const Importer = require("../Models/ImporterSignupModel");
+const Importer = require("../Models/Importer/ImporterSignupModel");
 
 
 // Controller function to get the importer's cart

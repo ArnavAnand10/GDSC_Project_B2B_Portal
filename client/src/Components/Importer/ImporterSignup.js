@@ -4,12 +4,12 @@ import Button from '@mui/material/Button';
 import { IconButton, InputAdornment, Stepper, Step, StepLabel, Snackbar, Alert, MenuItem } from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import importerImg from "../../src/Assets/Images/ImporterLoginImg.jpg"
+import importerImg from "../../Assets/Images/ImporterLoginImg.jpg"
 import ReactPhoneInput from 'react-phone-input-material-ui';
 import OTPInput from "otp-input-react";
-import { useFormContext } from "./Contexts/FormContext";
+import { useFormContext } from "../Contexts/FormContext";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import auth from "../Firebase/FireBase";
+import auth from "../../Firebase/FireBase";
 import LoadingButton from '@mui/lab/LoadingButton';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";

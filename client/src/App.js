@@ -6,6 +6,7 @@ import { FormProvider } from './Components/Contexts/FormContext';
 import { Routes, Route } from "react-router-dom";
 import ExporterHome from './Components/Exporter/ExporterHome';
 import ImporterCheckout from './Components/Importer/ImporterCheckout';
+import ImporterOrderHistory from './Components/Importer/ImporterOrderHistory';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path='/importer/signup' element={ <ImporterSignup/> } />
       <Route path='/exporter' element={<ExporterHome />} />
       <Route path='importer/checkout' element={<ImporterCheckout />}/>
+      <Route path='importer/orderHistory' element={<ImporterOrderHistory />}/>
     </Routes>
   </FormProvider>
 

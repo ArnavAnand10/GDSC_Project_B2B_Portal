@@ -1,15 +1,6 @@
 import React from 'react'
 import { TableContainer, TableBody, Table, TableCell, TableRow, TableFooter, TablePagination, TableHead } from '@mui/material';
-import TablePaginationActions from '@mui/material/TablePagination/TablePaginationActions';
-import { IconButton } from '@mui/material';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
-import { Box } from '@mui/material';
-import { useTheme, Paper, } from '@mui/material';
-import PropTypes from 'prop-types';
-import Pagination from '@mui/material';
+
 
 const ImporterOrderHistory = () => {
     const [page, setPage] = React.useState(0);
@@ -44,7 +35,7 @@ const ImporterOrderHistory = () => {
             id: 'ACTION',
             label: 'ACTION',
             minWidth: 170,
-            align: 'right',
+            align: 'center',
             format: (value) => value.toFixed(2),
         },
     ];
@@ -58,17 +49,18 @@ const ImporterOrderHistory = () => {
     const rows = [
         createData('#96459761', 'IN PROGRESS', 'Dec 7 2019 23:26', '$70 (4 Products)'),
         createData('#96459761', 'COMPLETED', 'Dec 7 2019 23:26', '$70 (4 Products)'),
-        createData('#96459761', 'CANCELLED', 'Dec 7 2019 23:26', '$70 (4 Products)'),
-        createData('#96459761', 'COMPLETED', 'Dec 7 2019 23:26', '$70 (4 Products)'),
-        createData('#96459761', 'CANCELLED', 'Dec 7 2019 23:26', '$70 (4 Products)'),
-        createData('#96459761', 'COMPLETED', 'Dec 7 2019 23:26', '$70 (4 Products)'),
-        createData('#96459761', 'CANCELLED', 'Dec 7 2019 23:26', '$70 (4 Products)'),
-        createData('#96459761', 'COMPLETED', 'Dec 7 2019 23:26', '$70 (4 Products)'),
-        createData('#96459761', 'COMPLETED', 'Dec 7 2019 23:26', '$70 (4 Products)'),
-        createData('#96459761', 'COMPLETED', 'Dec 7 2019 23:26', '$70 (4 Products)'),
-        createData('#96459761', 'COMPLETED', 'Dec 7 2019 23:26', '$70 (4 Products)'),
-        createData('#96459761', 'COMPLETED', 'Dec 7 2019 23:26', '$70 (4 Products)'),
-        createData('#96459761', 'COMPLETED', 'Dec 7 2019 23:26', '$70 (4 Products)'),
+        createData('#96459762', 'CANCELLED', 'Dec 8 2019 12:45', '$80 (5 Products)'),
+        createData('#96459763', 'COMPLETED', 'Dec 9 2019 09:10', '$90 (3 Products)'),
+        createData('#96459764', 'CANCELLED', 'Dec 10 2019 16:30', '$100 (6 Products)'),
+        createData('#96459765', 'COMPLETED', 'Dec 11 2019 10:55', '$110 (2 Products)'),
+        createData('#96459766', 'CANCELLED', 'Dec 12 2019 14:20', '$120 (7 Products)'),
+        createData('#96459767', 'COMPLETED', 'Dec 13 2019 20:05', '$130 (8 Products)'),
+        createData('#96459768', 'COMPLETED', 'Dec 14 2019 17:40', '$140 (4 Products)'),
+        createData('#96459769', 'COMPLETED', 'Dec 15 2019 11:15', '$150 (3 Products)'),
+        createData('#96459770', 'COMPLETED', 'Dec 16 2019 09:30', '$160 (5 Products)'),
+        createData('#96459771', 'COMPLETED', 'Dec 17 2019 13:00', '$170 (6 Products)'),
+        createData('#96459772', 'COMPLETED', 'Dec 18 2019 22:45', '$180 (2 Products)'),
+        createData('#96459773', 'COMPLETED', 'Dec 19 2019 19:20', '$190 (4 Products)'),
 
     ];
 
@@ -91,12 +83,12 @@ const ImporterOrderHistory = () => {
                 </ul>
 
             </div>
-            <div id='order-table' className=' w-[95%] py-2 px-4 mx-auto my-4'>
+            <div id='order-table' className=' w-[95%] py-2 px-4 mx-auto my-6 rounded-sm shadow-md'>
                 <TableContainer sx={{ maxHeight: 440 }}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead >
                             <TableRow>
-                                <TableCell align="left" sx={{ fontFamily: 'Poppins' }} colSpan={5}>
+                                <TableCell align="left" sx={{ fontFamily: 'Poppins'  }} colSpan={5} className='uppercase sm:text-md md:text-lg'>
                                     Order History
                                 </TableCell>
 
@@ -106,7 +98,8 @@ const ImporterOrderHistory = () => {
                                     <TableCell
                                         key={column.id}
                                         align={column.align}
-                                        style={{ top: 57, minWidth: column.minWidth, fontFamily: 'Poppins' }}
+                                        className='font-bold'
+                                        style={{ top: 57, minWidth: column.minWidth, fontFamily: 'Poppins',fontStyle:'bold'}}
                                     >
                                         {column.label}
                                     </TableCell>
@@ -126,17 +119,17 @@ const ImporterOrderHistory = () => {
                                                         {column.id === 'STATUS' && value === 'COMPLETED' ? (
                                                             <span style={{ color: 'green' }}>{value}</span>
                                                         ) : column.id === 'ACTION' && value.startsWith('View Details') ? (
-                                                            <span style={{ color: 'blue' }}>{value}</span>
+                                                            <span style={{ color: '#2DA5F3' }}>{value}</span>
                                                         ) :
-                                                        column.id === 'STATUS' && value === 'CANCELLED' ? (
-                                                            <span style={{ color: 'red' }}>{value}</span>
-                                                        ) :
-                                                        column.id === 'STATUS' && value === 'IN PROGRESS' ? (
-                                                            <span style={{ color: '#FA8232' }}>{value}</span>
-                                                        ) :
-                                                         (
-                                                            value
-                                                        )}
+                                                            column.id === 'STATUS' && value === 'CANCELLED' ? (
+                                                                <span style={{ color: 'red' }}>{value}</span>
+                                                            ) :
+                                                                column.id === 'STATUS' && value === 'IN PROGRESS' ? (
+                                                                    <span style={{ color: '#FA8232' }}>{value}</span>
+                                                                ) :
+                                                                    (
+                                                                        value
+                                                                    )}
                                                     </TableCell>
                                                 );
                                             })}

@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import ExporterHome from './Components/Exporter/ExporterHome';
 import ImporterCheckout from './Components/Importer/ImporterCheckout';
 import ImporterOrderHistory from './Components/Importer/ImporterOrderHistory';
+import CommonLoginOptions from './Components/Importer/CommonLoginOptions';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path='/exporter' element={<ExporterHome />} />
       <Route path='importer/checkout' element={<ImporterCheckout />}/>
       <Route path='importer/orderHistory' element={<ImporterOrderHistory />}/>
+      <Route path='importer/loginOptions' element={<CommonLoginOptions />}/>
     </Routes>
   </FormProvider>
 

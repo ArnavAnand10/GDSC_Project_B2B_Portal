@@ -14,12 +14,12 @@ function App() {
     
     <FormProvider>
     <Routes>
-      <Route path='/' element={ <Login/> } />
+      <Route path='/' element={ <CommonLoginOptions/> } />
       <Route path='/importer/signup' element={ <ImporterSignup/> } />
       <Route path='/exporter' element={<ExporterHome />} />
       <Route path='importer/checkout' element={<ImporterCheckout />}/>
       <Route path='importer/orderHistory' element={<ImporterOrderHistory />}/>
-      <Route path='importer/loginOptions' element={<CommonLoginOptions />}/>
+      <Route path='importer/login' element={<Login />}/>
     </Routes>
   </FormProvider>
 

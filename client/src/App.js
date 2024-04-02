@@ -17,9 +17,9 @@ function App() {
       <Route path='/' element={ <CommonLoginOptions/> } />
       <Route path='/importer/signup' element={ <ImporterSignup/> } />
       <Route path='/exporter' element={<ExporterHome />} />
-      <Route path='importer/checkout' element={<ImporterCheckout />}/>
-      <Route path='importer/orderHistory' element={<ImporterOrderHistory />}/>
-      <Route path='importer/login' element={<Login />}/>
+      <Route path='/importer/checkout' element={<ImporterCheckout />}/>
+      <Route path='/importer/orderHistory' element={<ImporterOrderHistory />}/>
+      <Route path='/importer/login' element={<Login />}/>
     </Routes>
   </FormProvider>
 

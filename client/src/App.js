@@ -9,6 +9,7 @@ import ImporterCheckout from './Components/Importer/ImporterCheckout';
 import ImporterOrderHistory from './Components/Importer/ImporterOrderHistory';
 import CommonLoginOptions from './Components/Importer/CommonLoginOptions';
 import Navbar from './Components/Contexts/navbar';
+import Footer from './Components/Contexts/footer';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Route path='/importer/orderHistory' element={<ImporterOrderHistory />}/>
       <Route path='/importer/login' element={<Login />}/>
       <Route path='/navbar' element={<Navbar />}/>
+      <Route path='/footer' element={<Footer />}/>
     </Routes>
   </FormProvider>
 

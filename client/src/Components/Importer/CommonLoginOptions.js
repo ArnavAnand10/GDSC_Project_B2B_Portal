@@ -15,7 +15,7 @@ const CommonLoginOptions = () => {
         <ul className=' flex flex-row gap-6 text-md font-medium cursor-pointer'>
           <li className='hover:font-bold'>About</li>
           <li className='hover:font-bold'>FAQ</li>
-          <li className='hover:font-bold'>XYZ</li>
+          <li className='hover:font-bold'>Contact Us</li>
           <li className='hover:font-bold'>XYZ</li>
         </ul>
         <span className=' min-w-12 cursor-pointer hover:font-bold'>

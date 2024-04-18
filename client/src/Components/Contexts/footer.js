@@ -95,10 +95,10 @@ export default function footer() {
         <div class="col-span-2 sm:col-span-1">
           <p class="font-medium text-gray-900 dark:text-white">Social Media</p>
 
-          <ul class="mt-6 space-y-4 text-sm -ml-5">
+          <ul class="mt-6 space-y-4 text-sm ">
             <li>
               <div>
-              <ul class="col-span-2 flex justify-start gap-6 lg:col-span-5 lg:justify-end">
+              <ul class="col-span-2 flex justify-start gap-6 lg:col-span-5 lg:justify-start">
           <li>
             <a
               href="#"

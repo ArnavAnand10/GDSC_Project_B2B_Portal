@@ -9,8 +9,8 @@ export default function Navbar() {
   };
 
   return (
-    <div className='h-[100vh]'>
-      <header className= "bg-[#2181F8] rounded-b-3xl h-[15%] w-full font-poppins">
+    <div>
+      <header className= "bg-[#2181F8] rounded-b-3xl font-poppins">
         <div className="container mx-auto px-4 py-8 flex items-center">
 
           <div className="mr-auto md:w-48 flex-shrink-0">
@@ -58,9 +58,9 @@ export default function Navbar() {
             </ul>
           </nav>
 
-          <hr/>
+         
         </div>
-        
+        <hr/>
       </header> 
     </div>
   );

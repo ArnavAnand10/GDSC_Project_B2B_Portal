@@ -1,8 +1,8 @@
 import React from 'react'
 import xx from '../../Assets/Images/register_header 1.png';
-import xy from '../../Assets/Images/image 37.png';
+import image1 from '../../Assets/Images/image 37.png';
 import yy from '../../Assets/Images/image 38.png';
-import xxx from '../../Assets/Images/importerImg.png'
+import importerImgDummy from '../../Assets/Images/importerImg.png'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -36,7 +36,7 @@ const CommonLoginOptions = () => {
         <div id='Exporter-Login-Card' onClick={()=>{
           navigate('/exporter');
         }} className=' hover:cursor-pointer hover:border-[#000000] w-1/3 h-[90%] my-4 mx-2 bg-[#FAFAFA] rounded-lg shadow-lg text-center'>
-          <img src={xy} className='h-auto mx-auto ' />
+          <img src={image1} className='h-auto mx-auto ' />
           <p className=' my-8 text-md  font-normal text-[#000000]'>
             <span className=' text-[#2181F8] font-medium'> Unlock </span>Seamless Trade <br /> Solutions
           </p>
@@ -46,7 +46,7 @@ const CommonLoginOptions = () => {
         <div id='Importer-Login-Card' onClick={()=>{
           navigate('/importer/login');
         }} className='  hover:cursor-pointer hover:border-[#000000] w-1/3 h-[90%] my-4 mx-2 bg-[#FAFAFA] rounded-lg shadow-lg text-center'>
-          <img src={xxx} className='h-auto mx-auto w-full' />
+          <img src={importerImgDummy} className='h-auto mx-auto w-full' />
           <p className=' my-8 text-md font-normal text-[#000000]'>
             <span className=' text-[#2181F8] font-medium'> Explore </span>Trade Options and <br /> Services
           </p>

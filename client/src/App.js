@@ -5,6 +5,7 @@ import ImporterSignup from './Components/Importer/ImporterSignup';
 import { FormProvider } from './Components/Contexts/FormContext';
 import { Routes, Route } from "react-router-dom";
 import ExporterHome from './Components/Exporter/ExporterHome';
+import ProductDetails from './Components/Importer/ProductDetails/ProductDetails';
 
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
     
     <FormProvider>
     <Routes>
-      <Route path='/' element={ <Login/> } />
+      <Route path='/details' element={ <ProductDetails/> } />
       <Route path='/importer/signup' element={ <ImporterSignup/> } />
       <Route path='/exporter' element={<ExporterHome />} />
     </Routes>

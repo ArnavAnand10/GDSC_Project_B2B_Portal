@@ -5,6 +5,8 @@ import ExporterCard from './ExporterCard';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import BarChart from './BarChart';
 import RecentOrderCard from './RecentOrderCard';
+import { MenuItem, Select } from '@mui/material';
+import { useState } from 'react';
 
 
 const ExporterDashboard = () => {
@@ -64,11 +66,38 @@ const ExporterDashboard = () => {
         orderAmount: "$51k"
     }]
 
+    const [timeSpan, setTimeSpan] = useState('This Month');
+
+    const handleTimeSpanChange = (event) => {
+        setTimeSpan(event.target.value);
+    };
+
     return (
 
-        <div className="dashboard-area basis-full py-10 px-5">
-            <h1 className="text-lg font-medium">Exporter - Dashboard</h1>
-            <h1 className="ml-5 mt-5">This Month </h1>
+        <div className="dashboard-area basis-full py-10 px-5 bg-gray-50">
+            <h1 className="text-lg font-bold uppercase"> Dashboard</h1>
+            <Select
+                variant='standard'
+                sx={{
+                    margin: "20px 15px 10px 15px"
+                }}
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={timeSpan}
+                label="Time Period"
+                defaultValue='This Month'
+                onChange={handleTimeSpanChange}
+            >
+                <MenuItem value={"Today"}>Today</MenuItem>
+                <MenuItem value={"This Week"}>This Week</MenuItem>
+                <MenuItem value={"This Month"}>This Month</MenuItem>
+                <MenuItem value={"This Year"}>This Year</MenuItem>
+                {/* Add industry-specific options */}
+                <MenuItem value={"Last 7 Days"}>Last 7 Days</MenuItem>
+                <MenuItem value={"Last 30 Days"}>Last 30 Days</MenuItem>
+                <MenuItem value={"Last Quarter"}>Last Quarter</MenuItem>
+                <MenuItem value={"Last Year"}>Last Year</MenuItem>
+            </Select>
             {/* cards */}
             <div className="grid grid-cols-4 text-center  gap-10  my-5 mx-5 ">
 
@@ -84,6 +113,7 @@ const ExporterDashboard = () => {
 
             <div className='flex flex-row '>
                 <div className=' w-3/4 shadow-md card-shadow bg-white m-5'>
+                <h1 className='ml-4 text-center mt-3 -mb-10 text-2xl font-medium'>Sales</h1>
                     <BarChart />
 
                 </div>

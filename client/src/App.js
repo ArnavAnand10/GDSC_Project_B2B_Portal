@@ -8,8 +8,9 @@ import ExporterHome from './Components/Exporter/ExporterHome';
 import ImporterCheckout from './Components/Importer/ImporterCheckout';
 import ImporterOrderHistory from './Components/Importer/ImporterOrderHistory';
 import CommonLoginOptions from './Components/Importer/CommonLoginOptions';
-import Navbar from './Components/Contexts/navbar';
-import Footer from './Components/Contexts/footer';
+import Navbar from './Components/Contexts/Navbar';
+import Footer from './Components/Contexts/Footer';
+
 
 function App() {
   return (

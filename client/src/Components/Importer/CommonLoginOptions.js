@@ -4,24 +4,17 @@ import image1 from '../../Assets/Images/image 37.png';
 import yy from '../../Assets/Images/image 38.png';
 import importerImgDummy from '../../Assets/Images/importerImg.png'
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../Contexts/Navbar';
+import Footer from '../Contexts/Footer';
 
 
 const CommonLoginOptions = () => {
   const navigate = useNavigate();
   return (
+    
     <div className='h-[100vh] '>
-      <nav id='un-auth-nav-bar' className='text-[#FFFFFF] font-poppins h-[10%] w-full px-3 py-1 rounded-md bg-[#2181F8] flex items-center justify-between shadow-lg'>
-        <span className=' sm:text-md text-lg  font-semibold py-2 px-4 hover:font-bold hover:cursor-pointer'>Company Logo</span>
-        <ul className=' flex flex-row gap-6 text-md font-medium cursor-pointer'>
-          <li className='hover:font-bold'>About</li>
-          <li className='hover:font-bold'>FAQ</li>
-          <li className='hover:font-bold'>Contact Us</li>
-          <li className='hover:font-bold'>XYZ</li>
-        </ul>
-        <span className=' min-w-12 cursor-pointer hover:font-bold'>
-          EN
-        </span>
-      </nav>
+      <Navbar /> 
+      
       <section id='hero-section' className='text-[#FFFFFF] md:flex md:items-center font-poppins md:h-[48%]  w-[94%] md:px-2 md:py-2 lg:px-4 lg:py-4 mx-auto md:my-4  rounded-xl '>
         <div>
         <h1 className=' pt-14 pb-2 px-10 lg:pt-16 lg:pb-4 lg:px-12 xl:text-4xl text-[#FFFFFF] font-poppins tracking-wide font-semibold sm:text-lg lg:leading-3 md:text-2xl lg:text-3xl'>Empowering Global Trade</h1>
@@ -54,6 +47,7 @@ const CommonLoginOptions = () => {
           <h3 className='sm:text-lg md:text-2xl text-[#2181F8]'>Importer</h3>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }
